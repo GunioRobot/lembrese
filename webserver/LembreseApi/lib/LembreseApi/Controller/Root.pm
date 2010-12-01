@@ -49,7 +49,7 @@ sub default :Path {
 
 do login using cache
 =cut
-sub login2 :Path('/login') :Args(0) {
+sub login: Path('/login') :Args(0) {
     my ( $self, $c ) = @_;
 
 	$c->stash->{msg} = 'Hello World!';

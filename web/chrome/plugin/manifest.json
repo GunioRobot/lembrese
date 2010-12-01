@@ -7,6 +7,7 @@
     "popup": "popup.html"
   },
   "permissions": [
-	"http://api.lembre.se:3000/"
+	"http://api.lembre.se:3000/",
+	"http://api.lembre.se/"
   ]
 }
