@@ -6,8 +6,11 @@
     "default_icon": "icon.png",
     "popup": "popup.html"
   },
-  "permissions": [
-	"http://api.lembre.se:3000/",
-	"http://api.lembre.se/"
+  "content_scripts": [
+    {
+      "matches": ["http://api.lembre.se:3000/*"],
+      "css": [],
+      "js": ["jquery.js", "login.js"]
+    }
   ]
 }
