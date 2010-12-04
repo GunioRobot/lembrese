@@ -1,0 +1,16 @@
+{
+  "name": "Lembre-se",
+  "version": "1.0",
+  "description": "Lembre-se login/observer",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://api.lembre.se:3000/*"],
+      "css": [],
+      "js": ["jquery.js", "login.js"]
+    }
+  ]
+}
