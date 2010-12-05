@@ -1,20 +1,55 @@
 <style>
+*,html,body {margin: 0; padding: 0; border: 0}
 body {
-  min-width:357px;
-  overflow-x:hidden;
+	min-width:240px;
+	overflow-x:hidden;
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
 }
-label {display:block}
-
+label {
+	display:block;
+	overflow:auto;
+}
+button {
+	float:right;
+	background-color:#eee;
+	border:1px outset #ddd;
+}
+button:active,button:focus {
+	border:1px inset #ddd;
+}
+input {
+	background-color:#FFFFFF;
+	border:1px solid #DDDDDD;
+	float:right;
+	width:153px;
+}
+label > span {
+	font-size: 0.9em;
+}
+fieldset {margin: 0; border: 0;clear:both;padding:0;}
+.width-1 {width: 60px}
+.width-2 {width: 120px}
+.width-3 {width: 180px}
+.width-4 {width: 240px}
+#login {
+	display: none;
+	margin: 5px;
+}
+#message {
+	text-align: center;
+}
 </style> 
 <div id="login">
-<form>
-	<label>User <input name="u" /></label>
-	<label>Pass <input name="p" type="password" /></label>
-	<button>send</button>
-</form>
+	<form class="width-4">
+		<fieldset>
+			<label><span>username:</span> <input name="u" /></label>
+			<label><span>password:</span> <input name="p" type="password" /></label>
+		</fieldset>
+		<button>send</button>
+	</form>
 </div>
 <p id="message"></p>
-
 <script language="javascript" src="jquery.js"></script> 
 <script language="javascript" src="login.js"></script>
-<div id="x"></div>

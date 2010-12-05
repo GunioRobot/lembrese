@@ -52,13 +52,48 @@ do login using cache
 sub login: Path('/login') :Args(0) {
     my ( $self, $c ) = @_;
 
-	$c->stash->{msg} = 'Hello World!';
-	$c->stash->{err} = 0;
-	$c->stash->{jd} = {testing => 'a'};
+	# Get the username and password from form
+	my $username = $c->request->params->{u};
+	my $password = $c->request->params->{p};
+
+	$c->stash->{msg} = 'user name or password invalid';
+	$c->stash->{err} = 1;
+	$c->stash->{jd} = {};
  
+	if ($username eq 'youaresodumb' && $password eq 'forreal'){
+		$c->stash->{err} = 0;
+		$c->stash->{msg} = 'You Are so Dumb login successfuly! For Real!';
+		$c->stash->{jd} = {
+			uid => '12345',
+			pid => '67890'
+		};
+	}
+
 	$c->forward('View::JSON');
 
 }
+
+sub bookmarkit: Path('/bookmarkit'):Args(0) {
+	my ( $self, $c ) = @_;
+
+	my $params = $c->request->params;
+
+	$c->stash->{msg} = 'ok';
+	$c->stash->{err} = 0;
+	$c->stash->{jd} = {};
+
+	if ($params->{url} eq 'chrome://extensions/'){
+		$c->stash->{err} = 1;
+		$c->stash->{jd}{nouid}=1;
+		$c->stash->{msg} = 'pid invalid! please re-login';
+
+	}
+ 
+	$c->forward('View::JSON');
+
+	
+}
+
 
 =head2 end
 

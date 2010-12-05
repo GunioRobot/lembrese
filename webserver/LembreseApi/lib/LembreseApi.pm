@@ -16,6 +16,8 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
+ 
+
 /;
 
 extends 'Catalyst';
@@ -37,6 +39,7 @@ __PACKAGE__->config(
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
 );
+ 
 
 
 __PACKAGE__->config({
