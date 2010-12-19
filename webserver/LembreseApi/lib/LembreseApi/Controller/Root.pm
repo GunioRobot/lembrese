@@ -45,33 +45,6 @@ sub default :Path {
     $c->response->status(404);
 }
 
-=head2 login
-
-do login using cache
-=cut
-sub login: Path('/login') :Args(0) {
-    my ( $self, $c ) = @_;
-
-	# Get the username and password from form
-	my $username = $c->request->params->{u};
-	my $password = $c->request->params->{p};
-
-	$c->stash->{msg} = 'user name or password invalid';
-	$c->stash->{err} = 1;
-	$c->stash->{jd} = {};
- 
-	if ($username eq 'youaresodumb' && $password eq 'forreal'){
-		$c->stash->{err} = 0;
-		$c->stash->{msg} = 'You Are so Dumb login successfuly! For Real!';
-		$c->stash->{jd} = {
-			uid => '12345',
-			pid => '67890'
-		};
-	}
-
-	$c->forward('View::JSON');
-
-}
 
 sub bookmarkit: Path('/bookmarkit'):Args(0) {
 	my ( $self, $c ) = @_;
@@ -93,6 +66,41 @@ sub bookmarkit: Path('/bookmarkit'):Args(0) {
 
 	
 }
+
+
+=head2 auto
+
+Check if there is a user.
+
+=cut
+
+# Note that 'auto' runs after 'begin' but before your actions and that
+# 'auto's "chain" (all from application path to most specific class are run)
+# See the 'Actions' section of 'Catalyst::Manual::Intro' for more info.
+sub auto :Private {
+	my ($self, $c) = @_; 
+	if ($c->controller eq $c->controller('Login') ) {
+		return 1;
+	}
+
+	my $params = $c->request->params;
+	my $param_uid   = "$params->{pid}|$params->{uid}";
+	my $session_uid = $c->session->{pid} . '|' . $c->session->{uid};
+	
+	if ($param_uid ne $session_uid) {
+
+		# Dump a log message to the development server debug output
+		$c->log->debug("***Root::auto User not found, forwarding to /login/error: param: $param_uid, session: $session_uid");
+		# Redirect the user to the login page
+		$c->response->redirect($c->uri_for('/login/error'));
+		# Return 0 to cancel 'post-auto' processing and prevent use of application
+		return 0;
+	}
+
+	# User found, so return 1 to continue with processing after this 'auto'
+	return 1;
+}
+
 
 
 =head2 end

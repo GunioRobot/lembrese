@@ -16,7 +16,10 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
- 
+
+	Session
+	Session::Store::FastMmap
+    Session::State::Cookie
 
 /;
 
@@ -33,6 +36,13 @@ $VERSION = eval $VERSION;
 # details given here can function as a default configuration,
 # with an external configuration file acting as an override for
 # local deployment.
+
+
+__PACKAGE__->config('Plugin::Session' => {
+	expires           => 3600 * 24 * 2, # 2 meses
+	verify_address    => 1,             # se mudar o IP cai
+	verify_user_agent => 1,             # o user-agent tambem
+});
 
 __PACKAGE__->config(
     name => 'LembreseApi',
