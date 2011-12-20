@@ -8,7 +8,7 @@ var pl = function(){
 			pl.bookmarkit();
 		});
 
-		if (!$uid){			
+		if (!$uid){
 			$('#login').show().find('form').submit(tryLogin);
 		}else{
 			$('#message').text('Stating...').css('color', 'gray');
@@ -26,7 +26,7 @@ var pl = function(){
 			data: xpost,
 			url: 'http://api.lembre.se:3000/login/',
 			success:  function(o) {
-				
+
 				if (o.err){
 					$('#message').text(o.msg).css('color', 'red');
 				}else{
@@ -54,7 +54,7 @@ var pl = function(){
 			beforeSend: function(){ me.find('button,input').attr('disabled', 'disabled');}
 		});
 
-		 
+
 		return false;
 	},
 	bookmarkit = function(){
@@ -80,7 +80,7 @@ var pl = function(){
 				}else{
 					$('#message').text(o.msg).css('color', 'green');
 					setTimeout( 'pl.closeWindow()',1000 );
-				
+
 				}
 			},
 			error: function (a, b){

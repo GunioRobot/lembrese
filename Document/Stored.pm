@@ -33,12 +33,12 @@ has 'jsdocUsr' => ( is => 'rw', isa => 'ArrayRef',
 
 has 'docUsr'  => ( is => 'rw', isa => 'relaxedJSON' ); #trigger => \&_docUsr_set );
 
-sub _get_content {    
-    my $self = shift;    
-    $self->browser->get( $self->browser->url );    
+sub _get_content {
+    my $self = shift;
+    $self->browser->get( $self->browser->url );
 }
 
-sub _set_storage {    
+sub _set_storage {
     my $self = shift;
     $self->_set_storage();
 }
@@ -50,10 +50,10 @@ sub _docUsr_set {
 }
 
 sub _init {
-    
+
     my $self = shift;
     my ($url, $user, $pass, $ip, $comment, $highlight) = @_;
-    
+
     $self->url       = $url;
     $self->user      = $user;
     $self->pass      = $pass;
@@ -63,10 +63,10 @@ sub _init {
     #$self->_get_content();
     $self->_set_storage();
     #$self->_commit();
-    
+
 }
 
-my $test = Document::Stored->new; 
+my $test = Document::Stored->new;
 $test->_init('UrL','UsEr','PaSs','Ip','CoMmEnT','HiGhLiGhT');
 
 1;

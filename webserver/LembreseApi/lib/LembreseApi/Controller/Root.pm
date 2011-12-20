@@ -61,10 +61,10 @@ sub bookmarkit: Path('/bookmarkit'):Args(0) {
 		$c->stash->{msg} = 'pid invalid! please re-login';
 
 	}
- 
+
 	$c->forward('View::JSON');
 
-	
+
 }
 
 
@@ -78,7 +78,7 @@ Check if there is a user.
 # 'auto's "chain" (all from application path to most specific class are run)
 # See the 'Actions' section of 'Catalyst::Manual::Intro' for more info.
 sub auto :Private {
-	my ($self, $c) = @_; 
+	my ($self, $c) = @_;
 	if ($c->controller eq $c->controller('Login') ) {
 		return 1;
 	}
@@ -86,7 +86,7 @@ sub auto :Private {
 	my $params = $c->request->params;
 	my $param_uid   = "$params->{pid}|$params->{uid}";
 	my $session_uid = $c->session->{pid} . '|' . $c->session->{uid};
-	
+
 	if ($param_uid ne $session_uid) {
 
 		# Dump a log message to the development server debug output
